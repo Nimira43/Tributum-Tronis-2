@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tribūtum Trōnis</title>
+    <link rel="icon" href="./images/TheFavicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Audiowide&family=Oxanium:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-theme="user">
+    <canvas id="grid" aria-hidden="true"></canvas>
+
+    <div class="boot" id="boot" aria-hidden="true">
+      <pre id="boot-text"></pre>
+      <p class="boot-skip">CLICK OR PRESS ANY KEY</p>
+    </div>
+
+    <main class="stage">
+      <header class="title">
+        <p class="kicker">
+          <span>//</span> A TRIBUTE TRANSMISSION <span>//</span>
+        </p>
+        <h1 class="glitch" data-text="Tribūtum Trōnis">Tribūtum Trōnis</h1>
+        <p class="subtitle">
+          <i class="rule"></i>The Dubsar Systema<i class="rule"></i>
+        </p>
+      </header>
+
+      <div class="disc-stage">
+        <div class="disc-halo"></div>
+        <div class="disc-float">
+          <button
+            class="disc"
+            id="disc"
+            type="button"
+            aria-label="Throw the identity disc"
+          >
+            <span class="disc-throw">
+              <span class="disc-tilt">
+                <span class="disc-whirl">
+                  <span class="disc-spin">
+                    <span class="disc-edge" style="--i: 1"></span>
+                    <span class="disc-edge" style="--i: 2"></span>
+                    <span class="disc-edge" style="--i: 3"></span>
+                    <span class="disc-edge" style="--i: 4"></span>
+                    <span class="disc-edge" style="--i: 5"></span>
+                    <svg
+                      class="disc-face"
+                      viewBox="0 0 200 200"
+                      aria-hidden="true"
+                    >
+                      <defs>
+                        <radialGradient id="plate" cx="50%" cy="50%" r="50%">
+                          <stop offset="0" stop-color="#0a1626" />
+                          <stop offset="0.7" stop-color="#03070f" />
+                          <stop offset="1" stop-color="#000" />
+                        </radialGradient>
+                      </defs>
+                      <circle cx="100" cy="100" r="97" fill="url(#plate)" />
+                      <circle
+                        class="ring-outer"
+                        cx="100"
+                        cy="100"
+                        r="93"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="5"
+                      />
+                      <circle
+                        cx="100"
+                        cy="100"
+                        r="86"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        opacity=".5"
+                      />
+                      <g class="ring-seg">
+                        <circle
+                          cx="100"
+                          cy="100"
+                          r="77"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="5"
+                          stroke-dasharray="44 16"
+                          opacity=".9"
+                        />
+                      </g>
+                      <g class="ring-ticks">
+                        <circle
+                          cx="100"
+                          cy="100"
+                          r="66"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-dasharray="1.5 5.4"
+                          opacity=".7"
+                        />
+                      </g>
+                      <circle
+                        cx="100"
+                        cy="100"
+                        r="56"
+                        fill="#02050b"
+                        stroke="currentColor"
+                        stroke-width="1"
+                        opacity=".9"
+                      />
+                      <circle
+                        class="ring-inner"
+                        cx="100"
+                        cy="100"
+                        r="40"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3.5"
+                      />
+                      <g fill="currentColor" opacity=".85">
+                        <rect x="97" y="46" width="6" height="10" rx="1" />
+                        <rect x="97" y="144" width="6" height="10" rx="1" />
+                        <rect x="46" y="97" width="10" height="6" rx="1" />
+                        <rect x="144" y="97" width="10" height="6" rx="1" />
+                      </g>
+                      <circle
+                        class="core"
+                        cx="100"
+                        cy="100"
+                        r="15"
+                        fill="currentColor"
+                      />
+                      <circle
+                        cx="100"
+                        cy="100"
+                        r="7"
+                        fill="#fff"
+                        opacity=".9"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <p class="disc-hint">
+          ▸ CLICK THE DISC ◂<br /><span>OR PRESS <b>P</b> TO RIDE</span>
+        </p>
+      </div>
+    </main>
+
+    <aside class="hud">
+      <div class="frame"><i></i><i></i><i></i><i></i></div>
+
+      <section class="panel panel-tl">
+        <h2>NAV · SECTOR 07</h2>
+        <dl>
+          <div>
+            <dt>POS.X</dt>
+            <dd id="stat-x">0.00</dd>
+          </div>
+          <div>
+            <dt>POS.Z</dt>
+            <dd id="stat-z">000000</dd>
+          </div>
+          <div>
+            <dt>VELOCITY</dt>
+            <dd id="stat-v">0 U/S</dd>
+          </div>
+        </dl>
+        <p class="meter-label" id="meter-label">DISC ENERGY</p>
+        <div class="meter"><i id="energy"></i></div>
+      </section>
+
+      <section class="panel panel-tr">
+        <h2 class="attract-only">GRID STATUS</h2>
+        <h2 class="play-only">ARENA</h2>
+        <dl class="play-only">
+          <div>
+            <dt>ROUND</dt>
+            <dd id="stat-round">1</dd>
+          </div>
+          <div>
+            <dt>RIVALS LEFT</dt>
+            <dd id="stat-rivals">0</dd>
+          </div>
+          <div>
+            <dt>SCORE</dt>
+            <dd id="stat-score">0</dd>
+          </div>
+          <div>
+            <dt>BEST</dt>
+            <dd id="stat-best">0</dd>
+          </div>
+        </dl>
+        <dl class="attract-only">
+          <div>
+            <dt>PROGRAMS</dt>
+            <dd id="stat-programs">0</dd>
+          </div>
+          <div>
+            <dt>DEREZZED</dt>
+            <dd id="stat-derez">0</dd>
+          </div>
+          <div>
+            <dt>ALLEGIANCE</dt>
+            <dd id="stat-side">USER</dd>
+          </div>
+          <div>
+            <dt>CYCLES/S</dt>
+            <dd id="stat-fps">60</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="panel panel-bl">
+        <h2>SYSTEM LOG</h2>
+        <ol id="log" aria-live="polite"></ol>
+      </section>
+
+      <p class="play-hint play-only">
+        <kbd>←</kbd><kbd>→</kbd> / <kbd>A</kbd><kbd>D</kbd> TURN &nbsp;·&nbsp;
+        HOLD <kbd>SPACE</kbd> BOOST
+      </p>
+
+      <nav class="controls">
+        <button type="button" data-action="ride" class="attract-only">
+          <kbd>P</kbd> RIDE
+        </button>
+        <button type="button" data-action="exit" class="play-only">
+          <kbd>ESC</kbd> EXIT
+        </button>
+        <button type="button" data-action="theme">
+          <kbd>C</kbd> ALLEGIANCE
+        </button>
+        <button type="button" data-action="audio" aria-pressed="false">
+          <kbd>M</kbd> AUDIO <span>OFF</span>
+        </button>
+      </nav>
+    </aside>
+
+    <div class="overlay" id="overlay" aria-live="assertive">
+      <p class="ov-kicker" id="ov-kicker"></p>
+      <h2 class="ov-title" id="ov-title"></h2>
+      <p class="ov-sub" id="ov-sub"></p>
+      <p class="ov-prompt" id="ov-prompt"></p>
+    </div>
+
+    <div class="touch" aria-hidden="true">
+      <button type="button" data-touch="left">◄</button>
+      <button type="button" data-touch="boost">BOOST</button>
+      <button type="button" data-touch="right">►</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
